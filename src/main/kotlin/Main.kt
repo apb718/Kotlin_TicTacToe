@@ -17,12 +17,30 @@ fun main() {
     while(!board.isGameOver){
         takeTurns()
         println("$currentPlayer's turn")
-        println("Enter Row Number:")
-        val row = Integer.parseInt(input.nextLine()) - 1
-        println("Enter Column Number:")
-        val col = Integer.parseInt(input.nextLine()) - 1
+        var validRow = false
+        var validCol = false
+        while(!validRow || !validCol){
+            println("Enter Row Number:")
+            val row = Integer.parseInt(input.nextLine()) - 1
+            if(row == 0 || row == 1 || row == 2){
+                validRow = true
+            }
+            else {
+                println("Invalid Row")
+            }
+            if(validRow==true) {
+                println("Enter Column Number:")
+                val col = Integer.parseInt(input.nextLine()) - 1
+                if (col == 0 || col == 1 || col == 2) {
+                    validCol = true
+                    board.placePiece(row, col, currentPlayer)
+                } else {
+                    println("Invalid Column")
+                }
 
-        board.placePiece(row,col,currentPlayer)
+            }
+        }
+
 
         if(board.isGameOver) {
             println("Do you want to play again? Type y or yes")
